@@ -2,9 +2,7 @@ package pet.project.mydebt.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.CollectionId;
+import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,32 +10,14 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@Data
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Loan {
-    @Embeddable
-    @Getter
-    @Setter
-    class Pk implements Serializable {
 
-        private Long idLoan;
-
-        private Long idRecipient;
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof Pk) {
-                if (this.idLoan.equals(((Pk)obj).idLoan))
-                    return this.idLoan.equals(((Pk)obj).idLoan);
-            }
-            return false;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(idLoan);
-        }
-    }
     @EmbeddedId
-    private Pk id;
+    private UserLoan loanId;
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "idDonor", nullable = false)

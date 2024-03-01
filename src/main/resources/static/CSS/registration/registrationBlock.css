@@ -1,0 +1,25 @@
+.parent {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    overflow: auto;
+    text-align: center;
+}
+
+.block {
+    margin: auto;
+    width:400px;
+}
+
+.MyStyle{
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    height:600px;
+    width:600px;
+    background: #9541c4;
+}
+
