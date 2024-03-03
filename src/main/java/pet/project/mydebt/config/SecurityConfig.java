@@ -31,7 +31,7 @@ public class SecurityConfig {
                         "/page/registration",
                         "/api/v1/registration"
                 ).permitAll()
-                .anyRequest().authenticated());
+                .anyRequest().hasAnyRole("USER", "ADMIN"));
         return http.build();
     }
 
