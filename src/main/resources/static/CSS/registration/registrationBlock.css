@@ -11,7 +11,16 @@
 
 .block {
     margin: auto;
-    width:400px;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 15px 10px 15px black;
+    width:600px;
+    background: white;
+    border: solid #222236 1px;
+}
+
+body {
+    background: #e5e5f7
 }
 
 .MyStyle{

@@ -29,9 +29,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers(
                         "/page/registration",
-                        "/api/v1/registration"
+                        "/api/v1/registration",
+                        "/CSS/**"
                 ).permitAll()
-                .anyRequest().hasAnyRole("USER", "ADMIN"));
+                .anyRequest().hasAnyAuthority("ROLE_USER", "ROLE_ADMIN"));
         return http.build();
     }
 
