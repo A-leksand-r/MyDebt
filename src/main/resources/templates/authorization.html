@@ -14,21 +14,16 @@
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
             crossorigin="anonymous"></script>
     <script src="../JS/angular-1.7.5.min.js"></script>
+    <script src="../JS/authorization.js"></script>
 </head>
-<body ng-app="registrationModule" ng-controller="registrationController">
+<body ng-app="authorization" ng-controller="authorizationController">
     <div class="parent">
             <div class="block">
                 <div>
-                    <h4 class="mb-4" align="center">Регистрация</h4>
-                    <input ng-model="fieldLastName" name="registrationFields" type="text" placeholder="*Фамилия" class="form-control mb-3" />
-                    <input ng-model="fieldMiddleName" name="registrationFields" type="text" placeholder="*Отчество" class="form-control mb-3" />
-                    <input ng-model="fieldFirstName" name="registrationFields" type="text" placeholder="*Имя" class="form-control mb-3" />
-                    <input ng-model="fieldUsername" name="registrationFields" type="text" placeholder="*Имя пользователя" class="form-control mb-3" />
-                    <input ng-model="fieldPassword" name="registrationFields" type="text" placeholder="*Пароль" class="form-control mb-3" />
-                    <input ng-model="fieldRepeatPassword" name="registrationFields" type="text" placeholder="*Повторите пароль" class="form-control mb-3" />
-                    <input ng-model="fieldEmail" name="registrationFields" type="text" placeholder="*Электронная почта" class="form-control mb-3" />
-                    <input ng-model="fieldPhone" name="registrationFields" type="text" placeholder="Телефон" class="form-control mb-3" />
-                    <input type="button" class="btn btn-primary" value="Регистрация"/>
+                    <h4 class="mb-4" align="center">Мои долги</h4>
+                    <input ng-model="fieldUsername" name="AuthorizationFields" type="text" placeholder="Имя пользователя" class="form-control mb-3" />
+                    <input ng-model="fieldPassword" name="AuthorizationFields" type="password" placeholder="Пароль" class="form-control mb-3" />
+                    <input type="button" class="btn btn-primary" value="Войти" ng-click="authorize(fieldUsername, fieldPassword)"/>
                 </div>
             </div>
     </div>
