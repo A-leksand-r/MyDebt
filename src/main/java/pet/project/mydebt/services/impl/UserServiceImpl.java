@@ -7,9 +7,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pet.project.mydebt.entities.User;
+import pet.project.mydebt.exceptions.BusinessException;
+import pet.project.mydebt.exceptions.enums.UserServiceFailedCode;
 import pet.project.mydebt.repositories.UserRepository;
 import pet.project.mydebt.services.UserService;
+import pet.project.mydebt.utils.UserUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,9 +25,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public void save(User user) {
+    public void save(User user) throws BusinessException {
         if (existsByUsername(user.getUsername())) {
-            // Резализовать исключение
+            throw new BusinessException("Пользователь c таким именем уже существует", UserServiceFailedCode.ALREADY_EXISTS);
+        }
+        else {
+            List<String> errors = UserUtils.validateFields(user);
+            if (!errors.isEmpty()) {
+                throw new BusinessException("Ошибка валидации", UserServiceFailedCode.VALIDATE_FAILED, String.join("\n", errors));
+            }
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
@@ -58,7 +68,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = Optional.ofNullable(userRepository.findByUsername(username));
         if (user.isEmpty()) {
-            throw new UsernameNotFoundException("User not found in database");
+            throw new UsernameNotFoundException("Пользователь в базе данных не найден");
         }
         return user.get();
     }

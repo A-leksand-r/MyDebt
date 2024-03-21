@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home page</title>
+    <title>Регистрация</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -14,21 +14,36 @@
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
             crossorigin="anonymous"></script>
     <script src="../JS/angular-1.7.5.min.js"></script>
+    <script src="../JS/registration.js"></script>
 </head>
-<body ng-app="registrationModule" ng-controller="registrationController">
+<body ng-app="registration" ng-controller="registrationController">
     <div class="parent">
             <div class="block">
                 <div>
-                    <h4 class="mb-4" align="center">Регистрация</h4>
-                    <input ng-model="fieldLastName" name="registrationFields" type="text" placeholder="*Фамилия" class="form-control mb-3" />
-                    <input ng-model="fieldMiddleName" name="registrationFields" type="text" placeholder="*Отчество" class="form-control mb-3" />
-                    <input ng-model="fieldFirstName" name="registrationFields" type="text" placeholder="*Имя" class="form-control mb-3" />
-                    <input ng-model="fieldUsername" name="registrationFields" type="text" placeholder="*Имя пользователя" class="form-control mb-3" />
-                    <input ng-model="fieldPassword" name="registrationFields" type="text" placeholder="*Пароль" class="form-control mb-3" />
-                    <input ng-model="fieldRepeatPassword" name="registrationFields" type="text" placeholder="*Повторите пароль" class="form-control mb-3" />
-                    <input ng-model="fieldEmail" name="registrationFields" type="text" placeholder="*Электронная почта" class="form-control mb-3" />
-                    <input ng-model="fieldPhone" name="registrationFields" type="text" placeholder="Телефон" class="form-control mb-3" />
-                    <input type="button" class="btn btn-primary" value="Регистрация"/>
+                    <h4 class="mb-4">Регистрация</h4>
+                    <h6 class="mb-3 text-danger">{{error}}</h6>
+                    <input ng-model="fieldLastName" name="registrationFields" type="text" placeholder="*Фамилия"
+                           class="form-control mb-3" />
+                    <input ng-model="fieldFirstName" name="registrationFields" type="text" placeholder="*Имя"
+                           class="form-control mb-3" />
+                    <input ng-model="fieldMiddleName" name="registrationFields" type="text" placeholder="*Отчество"
+                           class="form-control mb-3" />
+                    <input ng-model="fieldUsername" name="registrationFields" type="text" placeholder="*Имя пользователя"
+                           class="form-control mb-3" ng-keyup="checkExistOfUsername(fieldUsername)"/>
+                    <input ng-model="fieldPassword" name="registrationFields" type="password" placeholder="*Пароль"
+                           class="form-control mb-3" />
+                    <input ng-model="fieldRepeatPassword" name="registrationFields" type="password"
+                           placeholder="*Повторите пароль" class="form-control mb-3" />
+                    <input ng-model="fieldEmail" name="registrationFields" type="email" placeholder="*Электронная почта"
+                           class="form-control mb-3" />
+                    <input ng-model="fieldPhone" name="registrationFields" type="text" placeholder="Телефон"
+                           class="form-control mb-3" />
+                    <input type="button" class="btn btn-primary mb-3" value="Зарегистрироваться" ng-click="signUp(
+                    fieldLastName, fieldMiddleName, fieldFirstName, fieldUsername, fieldPassword, fieldRepeatPassword,
+                    fieldEmail, fieldPhone)"/>
+                    <br/>
+                    <input type="button" class="btn btn-outline-primary" value="Уже зарегистрированы?"
+                           ng-click="redirectToAuthorize()"/>
                 </div>
             </div>
     </div>

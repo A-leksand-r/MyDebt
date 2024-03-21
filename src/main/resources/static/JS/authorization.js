@@ -1,4 +1,4 @@
-var app = angular.module('authorization', []).config(function ($httpProvider) {
+const app = angular.module('authorization', []).config(function ($httpProvider) {
 
 });
 
@@ -7,19 +7,20 @@ app.controller("authorizationController", function ($scope, $http) {
 
     $scope.authorize = function(username, password){
         if (username && password) {
-            var payload = new FormData();
-            payload.append("username", username);
-            payload.append('password', password);
-            $http.post('/api/v1/authorize', payload ).then($scope.successCallback, $scope.errorCallback);
+            $http.post('/api/v1/authorize', {"username": username, "password": password} ).
+            then($scope.successCallback, $scope.errorCallback);
         } else console.log("Пустой ХУЙ");
     };
 
-    $scope.successCallback = function (response) {
-        $scope.popa = response.data;
-        console.log(response.data);
+    $scope.successCallback = function () {
+        window.location.href = "http://localhost:8080/";
     }
 
-    $scope.errorCallback = function (error) {
-        console.log("Ошибка");
+    $scope.errorCallback = function () {
+        $scope.message = "Неверные учетные данные.";
+    }
+
+    $scope.redirectToRegistration = function () {
+        window.location.href = "http://localhost:8080/page/registration";
     }
 });

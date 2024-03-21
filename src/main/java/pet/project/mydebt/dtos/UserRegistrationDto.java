@@ -7,9 +7,9 @@ public class UserRegistrationDto {
 
     private String lastName;
 
-    private String middleName;
-
     private String firstName;
+
+    private String middleName;
 
     private String username;
 
